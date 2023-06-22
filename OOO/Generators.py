@@ -1,3 +1,6 @@
+# A generator is a function that returns an iterator that produces a sequence of values when iterated over.
+# Generators are useful when we want to produce a large sequence of values, but we don't want to store all of them in memory at once.
+
 class InventoryTracker:
 
     def __init__(self):
@@ -32,3 +35,18 @@ inventory_page_generator = inventory_tracker.get_inventory()
 for items in inventory_page_generator:
     for item in items:
         print(item)
+        
+# Example 2: Python Generator Expression
+# create the generator object
+squares_generator = (i * i for i in range(5))
+
+# iterate over the generator and print the values
+for i in squares_generator:
+    print(i)
+    
+    
+###########
+generator = my_range(3)
+print(next(generator))  # 0
+print(next(generator))  # 1
+print(next(generator))  # 2
