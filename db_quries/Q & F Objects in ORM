@@ -1,0 +1,44 @@
+In Django's Object-Relational Mapping (ORM), the `Q` object and `F` object are powerful tools for building complex database queries and working with model data. These objects enable you to create more advanced and flexible queries.
+
+**1. `Q` Objects**:
+
+The `Q` object allows you to create complex queries by combining multiple conditions using logical operators (AND, OR, NOT). It is particularly useful for constructing dynamic queries based on user input.
+
+Here's an example that demonstrates how to use the `Q` object:
+
+```python
+from django.db.models import Q
+from myapp.models import Product
+
+# Get products that are either in category 'Electronics' or have a price less than 100
+query = Q(category='Electronics') | Q(price__lt=100)
+products = Product.objects.filter(query)
+
+# You can also negate a condition
+query = ~Q(category='Clothing')
+non_clothing_products = Product.objects.filter(query)
+```
+
+In the example, we use the `Q` object to construct a query that retrieves products in the 'Electronics' category or with a price less than 100. We can also negate a condition to retrieve products that are not in the 'Clothing' category.
+
+**2. `F` Objects**:
+
+The `F` object allows you to reference fields on the model itself, enabling you to perform operations on database fields within the query.
+
+Here's an example that demonstrates how to use the `F` object:
+
+```python
+from django.db.models import F
+from myapp.models import Product
+
+# Update the price of all products by increasing it by 10%
+Product.objects.update(price=F('price') * 1.10)
+
+# Find products where the available quantity is less than the minimum quantity required
+query = F('available_quantity') < F('min_quantity_required')
+low_stock_products = Product.objects.filter(query)
+```
+
+In this example, we use the `F` object to increase the price of all products by 10% and to find products with low stock by comparing the available quantity to the minimum quantity required.
+
+Both `Q` and `F` objects are powerful tools for building complex queries and making updates to database fields. They help you construct dynamic and flexible queries while keeping your code concise and efficient.

@@ -1,0 +1,38 @@
+# An abstract class is a class that cannot be instantiated and is meant to be used as a blueprint for other classes. It may contain abstract methods, 
+# which are methods without a defined implementation, and concrete methods that can be shared by subclasses.
+
+# No, you cannot directly instantiate an abstract class.
+
+from abc import ABC, abstractmethod
+from math import pi
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+        
+    @abstractmethod
+    def execute(self):
+        # All child class to implement this method 
+        raise NotImplementedError()
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return pi * self.radius ** 2
+
+class Rectangle(Shape):
+    def __init__(self, length, width):
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+
+circle = Circle(5)
+rectangle = Rectangle(4, 6)
+
+print("Circle area:", circle.area())
+print("Rectangle area:", rectangle.area())
