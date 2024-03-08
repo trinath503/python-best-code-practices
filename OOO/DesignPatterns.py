@@ -20,6 +20,25 @@ logger.info(" Logging an information message ")
 logger.error(" Logging an error message ")
 
 
+# return same instace 
+
+class SingleTon:
+
+    _instance = {}
+
+    def __new__(cls, *args, **kwargs):
+
+        if cls._instance is None:
+            cls._instance = super().__new__(cls, *args, **kwargs)
+        return cls._instance
+
+# Example usage:
+obj1 = Singleton()
+obj2 = Singleton()
+
+print(obj1 is obj2)  # Output: True
+
+
 # Factory Pattern
 
 class AnimalTypes:
